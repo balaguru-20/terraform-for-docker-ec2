@@ -2,6 +2,7 @@ resource "aws_instance" "this" {
   ami                    = "ami-09c813fb71547fc4f"
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   instance_type          = "t3.micro"
+  iam_instance_profile   = aws_iam_instance_profile.kub_instance.name
 
   #20gb is not enough
   root_block_device {
@@ -49,6 +50,11 @@ resource "aws_security_group" "allow_tls" {
   tags = {
     Name = "allow_tls"
   }
+}
+
+resource "aws_iam_instance_profile" "kub_instance" {
+  name = "my-instance-profile"
+  role = "ec2"
 }
 
 output "docker_ip" {
