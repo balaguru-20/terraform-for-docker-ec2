@@ -53,7 +53,7 @@ resource "aws_security_group" "allow_tls" {
 }
 
 resource "aws_iam_instance_profile" "kub_instance" {
-  name = "my-instance-profile"
+  name = "kube-instance-profile"
   role = "ec2"
 }
 
